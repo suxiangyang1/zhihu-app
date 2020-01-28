@@ -4,12 +4,24 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+	state: {
+		token: '11',
+		baseUrl: 'http://localhost:8080/api',
+		user: {
+			id: 1,
+			url: 'tao-ran-ran-42',
+			nickname: '陶然然',
+			avatar: 'https://niit-soft.oss-cn-hangzhou.aliyuncs.com/avatar/me.jpg'
+		}
+	},
+	mutations: {
+		setToken(state, data) {
+			state.url_token = data;
+		},
+		setUser(state, data) {
+			state.user = data;
+		}
+	},
+	actions: {},
+	modules: {}
 })
