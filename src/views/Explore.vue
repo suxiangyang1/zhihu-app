@@ -123,7 +123,7 @@ export default {
 							// payload.dominant是主色，payload.secondary是次色, payload.palette是调色板，含多个主要颜色数组,RGB形式表示
 							this.dominant = payload.dominant;
 							this.secondary = payload.secondary;
-							console.log('主色：' + payload.dominant);
+							// console.log('主色：' + payload.dominant);
 							//去掉rgb的外层rgb字母和括号，得到112,34,56这样的值
 							let str = payload.dominant.substring(4, payload.dominant.length - 1);
 							//按逗号分割，得到字符串数组
@@ -139,8 +139,8 @@ export default {
 							//创建两个rgba颜色，用来生成遮罩层的渐变色
 							let color1 = `rgba(${r},${g},${b},${a1})`;
 							let color2 = `rgba(${r},${g},${b},${a2})`;
-							console.log('颜色1：' + color1);
-							console.log('颜色2：' + color2);
+							// console.log('颜色1：' + color1);
+							// console.log('颜色2：' + color2);
 							//圆桌卡片顶部整宽部分背景色设置为图片主色
 							box.style.backgroundColor = this.dominant;
 							//右侧logo图覆盖两层蒙版，使用以下渐变色规则

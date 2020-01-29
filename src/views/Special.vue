@@ -1,5 +1,5 @@
 <template>
-	<div class="container">
+	<div>
 		<div class="banner">
 			<svg class="logo" viewBox="0 0 24 24" width="32" height="32">
 				<path

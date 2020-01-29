@@ -9,7 +9,7 @@
 
 body {
 	min-width: 1024px;
-	height: calc(100vh);
+	/* height: calc(100vh); */
 	font-size: 15px;
 	color: #1a1a1a;
 }
@@ -17,10 +17,16 @@ body {
 /* 超链接设置 */
 a {
 	text-decoration: none;
+	color: #8590a6;
+
 }
 
-/* ul去除. */
-ul {
+a:hover {
+	color: #1a1a1a;
+}
+
+/* 去除. */
+ul,li {
 	list-style: none;
 }
 
@@ -760,6 +766,11 @@ ul {
 	color: #8590a6;
 }
 
+/* 中等字体*/
+.normal-font {
+	font-size: 14px;
+}
+
 /* 鼠标手型 */
 .link {
 	cursor: pointer;
@@ -782,6 +793,22 @@ ul {
 	overflow: hidden;
 }
 
+/* 四行省略号 */
+.ellipsis-4 {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 4;
+	overflow: hidden;
+}
+
+/* 蓝色填充按钮 */
+.blue-fill-btn {
+	width: 70px;
+	height: 35px;
+	border-radius: 5px;
+	background-color: #0c89ff;
+	color: #fff;
+}
 
 /* 蓝色文本按钮 */
 .blue-txt-btn {
@@ -791,13 +818,9 @@ ul {
 	color: #0c89ff;
 }
 
-
-
-
-
-
-
-
+.card {
+	min-height: 200px;
+}
 
 
 /* flex元素在父容器中的显示顺序 */

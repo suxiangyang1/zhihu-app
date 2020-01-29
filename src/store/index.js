@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -16,12 +15,15 @@ export default new Vuex.Store({
 	},
 	mutations: {
 		setToken(state, data) {
-			state.url_token = data;
+			state.token = data;
 		},
 		setUser(state, data) {
 			state.user = data;
 		}
 	},
-	actions: {},
+	getters: {
+	},
+	actions: {
+	},
 	modules: {}
 })

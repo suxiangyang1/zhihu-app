@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Nav from '../views/Nav.vue'
+import Banner from '../views/Banner.vue'
 import Home from '../views/Home.vue'
 import Explore from '../views/Explore.vue'
 import Special from '../views/Special.vue'
@@ -15,7 +15,7 @@ Vue.use(VueRouter)
 
 const routes = [{
 		path: '/',
-		component: Nav,
+		component: Banner,
 		children: [{
 				path: '/',
 				redirect: 'home'
