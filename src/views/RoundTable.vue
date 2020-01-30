@@ -1,17 +1,15 @@
 <template>
-	<div class="wrapper">
-		<div class="container">
-			<div class="top">
-				<p class="roundtable">圆桌</p>
-				<p class="link">举办圆桌</p>
-			</div>
-			<div class="row">
-				<div class="col-3" v-for="(item, index) in roundTables" :key="index">
-					<div class="mask"></div>
-					<img :src="item.logo" alt="" />
-					<p class="name">{{ item.name }}</p>
-					<p class="visits_count">该圆桌被浏览{{ item.visitsCount }}次</p>
-				</div>
+	<div class="container fill-white border tiny-round">
+		<div class="d-flex justify-content-between p-2 m-2 border-bottom">
+			<h3>圆桌</h3>
+			<p class="blue strong link">举办圆桌</p>
+		</div>
+		<div class="d-flex flex-wrap pl-4 pt-3">
+			<div class="col-3 mb-3" v-for="(item, index) in roundTables" :key="index">
+				<div class="mask"></div>
+				<img :src="item.logo" />
+				<p class="name pl-2">{{ item.name }}</p>
+				<p class="meta">该圆桌被浏览{{ item.visitsCount }}次</p>
 			</div>
 		</div>
 	</div>
@@ -30,7 +28,7 @@ export default {
 			.get(this.$store.state.baseUrl + '/roundtable/list', {
 				params: {
 					offset: 0,
-					limit: 20
+					limit: 200
 				}
 			})
 			.then(res => {
@@ -41,75 +39,47 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.wrapper {
-	margin-top: 10px;
-	.container {
-		width: 80%;
-		margin: 0 auto;
-		padding: 5px;
-		background-color: #fff;
-		.top {
-			display: flex;
-			justify-content: space-between;
-			padding:15px 55px 15px 50px;
-			font-size: 15px;
-			font-weight: 600;
-			.roundtable{
-				color: #1a1a1a;
+.container {
+	.d-flex {
+		.col-3 {
+			position: relative;
+			width: 200px;
+			height: 230px;
+			.mask {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 30px;
+				width: 81%;
+				height: 200px;
+				border-radius: 3px;
+				box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+				background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+				z-index: 5;
 			}
-			.link {
-				text-decoration: none;
-				color: #0c89ff;
-				cursor: pointer;
+			.name {
+				position: absolute;
+				font-size: 15px;
+				color: #fff;
+				bottom: 45px;
+				z-index: 10;
 			}
-			border-radius: 3px;
-			box-shadow: 0 1px 3px 0 rgba(0, 34, 77, 0.05);
-		}
-		.row {
-			text-align: center;
-			.col-3 {
-				display: inline-block;
-				position: relative;
+			img {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 30px;
 				width: 200px;
-				height: 230px;
-				margin: 15px;
+				height: 200px;
 				border-radius: 5px;
-				padding-left: 5px;
-				.mask {
-					position: absolute;
-					top: 0;
-					left: 0;
-					right: 0;
-					bottom: 30px;
-					width: 200px;
-					height: 200px;
-					box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
-					background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
-					z-index: 5;
-				}
-				.name {
-					position: absolute;
-					font-size: 15px;
-					color: #fff;
-					bottom: 40px;
-					z-index: 10;
-				}
-				img {
-					position: absolute;
-					top: 0;
-					left: 0;
-					right: 0;
-					width: 200px;
-					height: 200px;
-					bottom: 30px;
-					border-radius: 5px;
-				}
-				.visits_count {
-					position: absolute;
-					bottom: 0;
-					font-size: 15px;
-					color: #8590A6;
-				}
+			}
+			.meta {
+				position: absolute;
+				bottom: 0;
+				font-size: 15px;
+				color: #8590a6;
 			}
 		}
 	}

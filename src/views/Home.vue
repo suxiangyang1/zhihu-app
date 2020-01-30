@@ -262,31 +262,17 @@
 						<li class="ml-1">侵权举报</li>
 						<li class="ml-2">网上有害信息举报专区</li>
 					</div>
+					<div class="d-flex p-2  footer-item"><li class="ml-1">京ICP证 1104745号</li></div>
+					<div class="d-flex p-2  footer-item"><li class="ml-1">京ICP备 13052560号-1</li></div>
 					<div class="d-flex p-2  footer-item">
-						<li class="ml-1">京ICP证 1104745号</li>
-					</div>
-					<div class="d-flex p-2  footer-item">
-						<li class="ml-1">京ICP备 13052560号-1</li>
-					</div>
-					<div class="d-flex p-2  footer-item">
-						<img src="https://pic3.zhimg.com/80/v2-d0289dc0a46fc5b15b3363ffa78cf6c7.png">
+						<img src="https://pic3.zhimg.com/80/v2-d0289dc0a46fc5b15b3363ffa78cf6c7.png" />
 						<li class="ml-1">京公网安备 11010802010035号</li>
 					</div>
-					<div class="d-flex p-2  footer-item">
-						<li class="ml-1">互联网药品信息服务资格证书</li>
-					</div>
-					<div class="d-flex p-2  footer-item">
-						<li>（京）-非经营性-2017-0067</li>
-					</div>
-					<div class="d-flex p-2  footer-item">
-						<li class="ml-1">违法和不良信息举报：010-82716601</li>
-					</div>
-					<div class="d-flex p-2  footer-item">
-						<li class="ml-1">证照中心</li>
-					</div>
-					<div class="d-flex p-2  footer-item">
-						<li class="ml-1">联系我们@2020知乎</li>
-					</div>
+					<div class="d-flex p-2  footer-item"><li class="ml-1">互联网药品信息服务资格证书</li></div>
+					<div class="d-flex p-2  footer-item"><li>（京）-非经营性-2017-0067</li></div>
+					<div class="d-flex p-2  footer-item"><li class="ml-1">违法和不良信息举报：010-82716601</li></div>
+					<div class="d-flex p-2  footer-item"><li class="ml-1">证照中心</li></div>
+					<div class="d-flex p-2  footer-item"><li class="ml-1">联系我们@2020知乎</li></div>
 				</div>
 			</div>
 		</div>
@@ -329,8 +315,6 @@ export default {
 // 关注 推荐 热榜菜单超链接样式
 a {
 	text-align: center;
-}
-a {
 	color: #444;
 }
 

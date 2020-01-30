@@ -26,7 +26,8 @@ a:hover {
 }
 
 /* 去除. */
-ul,li {
+ul,
+li {
 	list-style: none;
 }
 
@@ -818,10 +819,9 @@ ul,li {
 	color: #0c89ff;
 }
 
-.card {
+.card{
 	min-height: 200px;
 }
-
 
 /* flex元素在父容器中的显示顺序 */
 .order-first {
