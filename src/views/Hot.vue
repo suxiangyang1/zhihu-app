@@ -1,76 +1,73 @@
 <template>
 	<div>
-		<div v-for="(item, index) in hotList" :key="index" class="card p-3 fill-white tiny-round  border-bottom">
-			<h3 v-if="item.target.question == null" class="mb-2">{{ item.target.title }}</h3>
-			<h3 v-else class="mb-2">{{ item.target.question.title }}</h3>
-			<div class="d-flex p-2" v-if="item.target.thumbnail">
-				<div class="fruid-col-3 mr-3"><img :src="item.target.thumbnail" class="fill tiny-round" /></div>
-				<p class="fruid-col-9 ellipsis-4">{{ item.target.author.name }}:{{ item.target.excerpt }}</p>
-			</div>
-			<div class="d-flex p-2 mb-4" v-else>
-				<p class="fruid-col-12 ellipsis">{{ item.target.author.name }}:{{ item.target.excerpt }}</p>
-			</div>
-			<ul class="d-flex align-items-center">
-				<button class="d-block blue-txt-btn pl-3 pr-3 link">
-					<svg class="blue-icon" viewBox="0 0 24 24" width="10" height="10">
-						<path
-							d="M2 18.242c0-.326.088-.532.237-.896l7.98-13.203C10.572 3.57 11.086 3 12 3c.915 0 1.429.571 1.784 1.143l7.98 13.203c.15.364.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H3.955c-1.08 0-1.955-.517-1.955-1.9z"
-							fill-rule="evenodd"
-						></path>
-					</svg>
-					赞同{{ item.target.voteup_count }}
-				</button>
-				<button class="d-block blue-txt-btn pl-3 pr-3 ml-3 link">
-					<svg class="blue-icon" viewBox="0 0 24 24" width="10" height="10">
-						<path
-							d="M20.044 3H3.956C2.876 3 2 3.517 2 4.9c0 .326.087.533.236.896L10.216 19c.355.571.87 1.143 1.784 1.143s1.429-.572 1.784-1.143l7.98-13.204c.149-.363.236-.57.236-.896 0-1.386-.876-1.9-1.956-1.9z"
-							fill-rule="evenodd"
-						></path>
-					</svg>
-				</button>
+		<!-- 顶部tab导航 -->
+		<ul class="tab-title border-bottom">
+			<li v-for="(title, index) in tabTitle" @click="change(index)" :class="{ active: cur == index }" :key="index">{{ title }}</li>
+		</ul>
+		<!-- 切换的内容区 -->
+		<div>
+			<div v-for="(content, index) in tabContent" v-show="cur == index" :key="index">
+				<div class="card border-bottom fill-white" v-for="(item, index1) in content" :key="index1">
+					<div v-if="!item.children[0].thumbnail" class="d-flex p-3">
+						<h3 class="light-grey" :class="{ top: index1 < 3 }">{{ index1 + 1 }}</h3>
+						<div class="ml-3">
+							<a :href="'https://www.zhihu.com/question/' + item.target.id" target="_blank" class="sub-title">{{ item.target.title }}</a>
+							<p class="mt-2 ellipsis">{{ item.target.excerpt }}</p>
+							<ul class="d-flex mt-3">
+								<li class="mr-3 light-grey">
+									<svg class="grey-icon" viewBox="0 0 24 24" width="18" height="18">
+										<path
+											d="M14.553 20.78c.862-.651 1.39-1.792 1.583-3.421.298-2.511-.656-4.904-2.863-7.179.209 2.291.209 3.73 0 4.314-.41 1.143-1.123 1.983-1.91 2.03-1.35.079-2.305-.512-2.863-1.774-.676 1.25-.782 2.556-.318 3.915.31.906.94 1.684 1.89 2.333C7.144 20.131 5 17.336 5 14.022c0-2.144.898-4.072 2.325-5.4.062 2.072.682 3.598 2.13 4.822-.67-1.112-.734-2.11-.734-3.517 0-3.253 2.067-6.007 4.913-6.927a7.35 7.35 0 0 0 2.157 4.918C17.722 9.214 19 11.463 19 14.022c0 3.073-1.844 5.7-4.447 6.758z"
+											fill-rule="evenodd"
+										></path>
+									</svg>
+									{{ item.target.follower_count }}万领域热度
+								</li>
+								<li class="light-grey">
+									<svg class="grey-icon" viewBox="0 0 24 24" width="1.2em" height="1.2em">
+										<path
+											d="M2.931 7.89c-1.067.24-1.275 1.669-.318 2.207l5.277 2.908 8.168-4.776c.25-.127.477.198.273.39L9.05 14.66l.927 5.953c.18 1.084 1.593 1.376 2.182.456l9.644-15.242c.584-.892-.212-2.029-1.234-1.796L2.93 7.89z"
+											fill-rule="evenodd"
+										></path>
+									</svg>
+									分享
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div v-else class="d-flex p-3">
+						<h3 class="light-grey" :class="{ top: index1 < 3 }">{{ index1 + 1 }}</h3>
+						<div class="col-8 ml-3 mr-3">
+							<a :href="'https://www.zhihu.com/question/' + item.target.id" target="_blank" class="sub-title">{{ item.target.title }}</a>
+							<p class="mt-2 ellipsis">{{ item.target.excerpt }}</p>
+							<ul class="d-flex mt-3">
+								<li class="mr-3 light-grey">
+									<svg class="grey-icon" viewBox="0 0 24 24" width="18" height="18">
+										<path
+											d="M14.553 20.78c.862-.651 1.39-1.792 1.583-3.421.298-2.511-.656-4.904-2.863-7.179.209 2.291.209 3.73 0 4.314-.41 1.143-1.123 1.983-1.91 2.03-1.35.079-2.305-.512-2.863-1.774-.676 1.25-.782 2.556-.318 3.915.31.906.94 1.684 1.89 2.333C7.144 20.131 5 17.336 5 14.022c0-2.144.898-4.072 2.325-5.4.062 2.072.682 3.598 2.13 4.822-.67-1.112-.734-2.11-.734-3.517 0-3.253 2.067-6.007 4.913-6.927a7.35 7.35 0 0 0 2.157 4.918C17.722 9.214 19 11.463 19 14.022c0 3.073-1.844 5.7-4.447 6.758z"
+											fill-rule="evenodd"
+										></path>
+									</svg>
+									{{ item.target.follower_count }}万领域热度
+								</li>
+								<li class="light-grey">
+									<svg class="grey-icon" viewBox="0 0 24 24" width="1.2em" height="1.2em">
+										<path
+											d="M2.931 7.89c-1.067.24-1.275 1.669-.318 2.207l5.277 2.908 8.168-4.776c.25-.127.477.198.273.39L9.05 14.66l.927 5.953c.18 1.084 1.593 1.376 2.182.456l9.644-15.242c.584-.892-.212-2.029-1.234-1.796L2.93 7.89z"
+											fill-rule="evenodd"
+										></path>
+									</svg>
+									分享
+								</li>
+							</ul>
+						</div>
+						<div class="col-4 mr-3">
+							<img :src="item.children[0].thumbnail" width="190px" height="105px" class="tiny-round" /></div>
+					</div>
+				</div>
 
-				<li class="ml-3 light-grey">
-					<svg class="grey-icon mb-n1" viewBox="0 0 24 24" width="1.2em" height="1.2em">
-						<path
-							d="M10.241 19.313a.97.97 0 0 0-.77.2 7.908 7.908 0 0 1-3.772 1.482.409.409 0 0 1-.38-.637 5.825 5.825 0 0 0 1.11-2.237.605.605 0 0 0-.227-.59A7.935 7.935 0 0 1 3 11.25C3 6.7 7.03 3 12 3s9 3.7 9 8.25-4.373 9.108-10.759 8.063z"
-							fill-rule="evenodd"
-						></path>
-					</svg>
-					{{ item.target.comment_count }}条评论
-				</li>
-				<li class="ml-3 light-grey">
-					<svg class="grey-icon mb-n1" viewBox="0 0 24 24" width="1.2em" height="1.2em">
-						<path
-							d="M2.931 7.89c-1.067.24-1.275 1.669-.318 2.207l5.277 2.908 8.168-4.776c.25-.127.477.198.273.39L9.05 14.66l.927 5.953c.18 1.084 1.593 1.376 2.182.456l9.644-15.242c.584-.892-.212-2.029-1.234-1.796L2.93 7.89z"
-							fill-rule="evenodd"
-						></path>
-					</svg>
-					分享
-				</li>
-				<li class="ml-3 light-grey">
-					<svg class="grey-icon mb-n1" viewBox="0 0 24 24" width="1.2em" height="1.2em">
-						<path
-							d="M5.515 19.64l.918-5.355-3.89-3.792c-.926-.902-.639-1.784.64-1.97L8.56 7.74l2.404-4.871c.572-1.16 1.5-1.16 2.072 0L15.44 7.74l5.377.782c1.28.186 1.566 1.068.64 1.97l-3.89 3.793.918 5.354c.219 1.274-.532 1.82-1.676 1.218L12 18.33l-4.808 2.528c-1.145.602-1.896.056-1.677-1.218z"
-							fill-rule="evenodd"
-						></path>
-					</svg>
-					收藏
-				</li>
-				<li class="ml-3 light-grey">
-					<svg class="grey-icon mb-n1" viewBox="0 0 24 24" width="1.2em" height="1.2em">
-						<path
-							d="M2 8.437C2 5.505 4.294 3.094 7.207 3 9.243 3 11.092 4.19 12 6c.823-1.758 2.649-3 4.651-3C19.545 3 22 5.507 22 8.432 22 16.24 13.842 21 12 21 10.158 21 2 16.24 2 8.437z"
-							fill-rule="evenodd"
-						></path>
-					</svg>
-					喜欢
-				</li>
-				<li class="ml-3 light-grey">
-					<svg class="grey-icon" viewBox="0 0 24 24" width="1.2em" height="1.2em">
-						<path d="M5 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" fill-rule="evenodd"></path>
-					</svg>
-				</li>
-			</ul>
+				<p class="tx-center light-grey mt-4 mb-4 no-more">没有更多内容</p>
+			</div>
 		</div>
 	</div>
 </template>
@@ -80,15 +77,67 @@ export default {
 	name: 'hot',
 	data() {
 		return {
-			hotList: []
+			tabTitle: ['全站', '科学', '数码', '体育', '时尚', '影视', '校园', '汽车'],
+			category: ['total', 'science', 'digital', 'sport', 'fashion', 'film', 'school', 'car'],
+			tabContent: [[], [], [], [], [], [], [], []],
+			content: [],
+			cur: 0
 		};
 	},
 	created() {
-		this.axios.get('/api/hot').then(res => {
-			this.hotList = res.data.data.data;
-			console.log(this.hotList);
+		this.axios.get('/api/hot-lists/total').then(res => {
+			this.tabContent.splice(0, 0, res.data.data.data);
 		});
+	},
+	methods: {
+		change(index) {
+			this.cur = index;
+			// console.log('->' + this.cur);
+			//取出对应的参数数组的值
+			let param = this.category[index];
+			//发起对应请求
+			this.axios.get('/api/hot-lists/' + param).then(res => {
+				this.tabContent.splice(index, 0, res.data.data.data);
+			});
+		}
 	}
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.tab-title {
+	display: flex;
+	align-items: center;
+	height: 63px;
+	padding: 0.625rem;
+	background-color: #fff;
+	li {
+		width: 68px;
+		height: 30px;
+		line-height: 30px;
+		text-align: center;
+		border-radius: 2px;
+		margin: 8px;
+		background-color: #f6f6f6;
+		color: #646464;
+		cursor: pointer;
+	}
+	.active {
+		background-color: #e6f3ff;
+		color: #0c89ff;
+	}
+}
+
+.top {
+	color: #fc9300;
+}
+.no-more:before,
+.no-more:after {
+	content: '';
+	display: inline-block;
+	width: 24px;
+	height: 1px;
+	margin: 0 10px;
+	vertical-align: middle;
+	background-color: #d3d3d3;
+}
+</style>

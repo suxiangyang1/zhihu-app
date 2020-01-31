@@ -77,7 +77,7 @@
 											fill-rule="evenodd"
 										></path>
 									</svg>
-									<router-link to="/logout">退出</router-link>
+									<a @click.prevent.stop="logout($event)" href="#">退出</a>
 								</li>
 							</ul>
 						</transition>
@@ -157,6 +157,11 @@ export default {
 
 				this.fixed = scrolled <= 152;
 			}
+		},
+		logout(event) {
+			this.token = '';
+			this.show = false;
+			this.$store.commit('setToken', '');
 		}
 	}
 };

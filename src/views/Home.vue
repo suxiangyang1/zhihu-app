@@ -3,7 +3,7 @@
 		<div class="d-flex justify-content-between mt-2">
 			<div class="fruid-col-8 tiny-round mr-2 shadow">
 				<div><img src="https://static.zhihu.com/heifetz/assets/NewYear2020Banner.e5ccc19d.png" class="fill tiny-round mb-1" /></div>
-				<div class="fill-white mb-2">
+				<div class="fill-white border-bottom">
 					<ul class="sub-bar d-flex align-items-center justify-content-around">
 						<li><router-link to="/home/recommoned">推荐</router-link></li>
 						<li><router-link to="/home/follow">关注</router-link></li>
@@ -276,6 +276,13 @@
 				</div>
 			</div>
 		</div>
+		<button class="goto-top" @click="backToTop" v-show="btnFlag">
+			<svg class="grey-icon" title="回到顶部" viewBox="0 0 24 24" width="24" height="24">
+				<path
+					d="M16.036 19.59a1 1 0 0 1-.997.995H9.032a.996.996 0 0 1-.997-.996v-7.005H5.03c-1.1 0-1.36-.633-.578-1.416L11.33 4.29a1.003 1.003 0 0 1 1.412 0l6.878 6.88c.782.78.523 1.415-.58 1.415h-3.004v7.005z"
+				></path>
+			</svg>
+		</button>
 	</div>
 </template>
 
@@ -283,44 +290,55 @@
 export default {
 	name: 'home',
 	data() {
-		return {};
+		return {
+			btnFlag: false
+		};
 	},
 	created() {},
-	mounted() {},
-	methods: {}
+	mounted() {
+		// window对象，所有浏览器都支持window对象。它表示浏览器窗口，监听滚动事件
+		window.addEventListener('scroll', this.scrollToTop);
+	},
+	methods: {
+		backToTop() {
+			//加定时器，平滑过渡回到顶部
+			let timer = setInterval(() => {
+				let ispeed = Math.floor(-this.scrollTop / 5);
+				document.documentElement.scrollTop = document.body.scrollTop = this.scrollTop + ispeed;
+				if (this.scrollTop === 0) {
+					clearInterval(timer);
+				}
+			}, 16);
+		},
+		// 计算距离顶部的高度，当高度大于60显示回顶部图标，小于60则隐藏
+		scrollToTop() {
+			let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+			this.scrollTop = scrollTop;
+			if (this.scrollTop > 1000) {
+				this.btnFlag = true;
+			} else {
+				this.btnFlag = false;
+			}
+		}
+	}
 };
 </script>
 <style lang="scss" scoped>
-// 关注 推荐 热榜菜单初始样式
+// 关注 推荐 热榜导航初始样式
 .sub-bar {
 	width: 25%;
 	height: 52px;
 }
 
-// 关注 推荐 热榜菜单滚动到顶部固定的样式
-.auto_fixed {
-	position: fixed;
-	top: 0px;
-	width: 200px;
-	height: 52px;
-	margin-left: 100px;
-	z-index: 1200;
-	.router-link-active {
-		color: #0084ff;
-		font-weight: 500;
-		font-size: 16px;
-	}
-}
-
-// 关注 推荐 热榜菜单超链接样式
+// 关注 推荐 热榜导航超链接样式
 a {
 	text-align: center;
 	color: #444;
 }
-
+//激活样式
 .router-link-active {
-	font-weight: 600;
-	color: #439ccc;
+	font-weight: 500;
+	color: #0084ff;
 }
 
 // 右边第一张卡片的item文字悬停色
@@ -348,6 +366,7 @@ a {
 	fill: #576cd3;
 }
 
+// 数字样式
 .number-icon {
 	font-size: 12px;
 	padding: 4px 10px;
@@ -361,5 +380,16 @@ a {
 	li {
 		display: inline;
 	}
+}
+.goto-top {
+	position: fixed;
+	right: 30px;
+	bottom: 30px;
+	width: 40px;
+	height: 40px;
+	background: #fff;
+	border: 1px solid #eee;
+	border-radius: 3px;
+	cursor: pointer;
 }
 </style>

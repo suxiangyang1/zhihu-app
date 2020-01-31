@@ -1,14 +1,14 @@
 <template>
 	<div class="container fill-white border tiny-round">
 		<div class="d-flex justify-content-between p-2 m-2 border-bottom">
-			<h3>圆桌</h3>
+			<h4>圆桌</h4>
 			<p class="blue strong link">举办圆桌</p>
 		</div>
-		<div class="d-flex flex-wrap pl-4 pt-3">
+		<div class="d-flex flex-wrap pl-5 pt-3">
 			<div class="col-3 mb-3" v-for="(item, index) in roundTables" :key="index">
 				<div class="mask"></div>
 				<img :src="item.logo" />
-				<p class="name pl-2">{{ item.name }}</p>
+				<p class="name pl-1">{{ item.name }}</p>
 				<p class="meta">该圆桌被浏览{{ item.visitsCount }}次</p>
 			</div>
 		</div>
@@ -51,7 +51,7 @@ export default {
 				left: 0;
 				right: 0;
 				bottom: 30px;
-				width: 81%;
+				width: 200px;
 				height: 200px;
 				border-radius: 3px;
 				box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);

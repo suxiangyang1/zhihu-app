@@ -761,6 +761,12 @@ li {
 	color: #1a1a1a;
 }
 
+.sub-title{
+	color:#1a1a1a;
+	font-size: 18px;
+	font-weight: 600;
+}
+
 /* 标注字体 */
 .meta {
 	font-size: 12px;
